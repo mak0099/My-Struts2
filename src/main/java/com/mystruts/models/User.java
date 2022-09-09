@@ -1,47 +1,8 @@
-package com.mystruts.actions;
+package com.mystruts.models;
 
-import java.io.UnsupportedEncodingException;
-import com.mystruts.models.User;
-import com.opensymphony.xwork2.ActionSupport;
+import com.mystruts.models.dao.UserDao;
 
-@SuppressWarnings("serial")
-public class RegistrationAction extends ActionSupport {
-	public void validate() {
-		if (getId().length() == 0) {
-			addFieldError("id", getText("MSE001"));
-		}
-		// check already exist ID
-
-		else
-			try {
-				if (getId().getBytes("MS932").length > getId().length()) {
-					addFieldError("id", getText("MSE008"));
-				}
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		if (getName().length() == 0) {
-			addFieldError("name", getText("MSE009"));
-		}
-	}
-
-	public String execute() {
-		return "success";
-	}
-
-	public String confirmRegistration() {
-		User user = new User();
-		user.setId(id);
-		user.setPassword(password);
-		user.setName(name);
-		user.setNameKatakana(nameKatakana);
-		user.setDateOfBirth(dateOfBirth);
-		user.setClub(club);
-		user.save();
-		return "success";
-	}
-
+public class User extends UserDao {
 	private String id;
 	private String password;
 	private String passwordConfirmation;
@@ -104,5 +65,18 @@ public class RegistrationAction extends ActionSupport {
 
 	public void setClub(String club) {
 		this.club = club;
+	}
+	public User save() {
+		insertUser(this);
+		return this;
+	}
+	public User update() {
+		updateUser(this);
+		return this;
+	}
+	
+	public User delete() {
+		deleteUser(this);
+		return this;
 	}
 }
