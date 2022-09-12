@@ -11,6 +11,10 @@
         <action name="index">
             <result>/index.jsp</result>
         </action>
+        <action name="submitLogin" class="com.mystruts.actions.LoginAction">
+        	<result name="success">/search.jsp</result>
+        	<result name="input">/login.jsp</result>
+        </action>
         <action name="checkAvailability" class="com.mystruts.actions.CheckAvailabilityAction">
         	<result name="success">/registration.jsp</result>
         	<result name="input">/registration.jsp</result>

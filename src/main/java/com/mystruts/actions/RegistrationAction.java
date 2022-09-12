@@ -1,28 +1,78 @@
 package com.mystruts.actions;
 
-import java.io.UnsupportedEncodingException;
 import com.mystruts.models.User;
+import com.mystruts.services.AppService;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
 public class RegistrationAction extends ActionSupport {
 	public void validate() {
+//		If no user ID is entered
 		if (getId().length() == 0) {
 			addFieldError("id", getText("MSE001"));
 		}
-		// check already exist ID
-
-		else
-			try {
-				if (getId().getBytes("MS932").length > getId().length()) {
-					addFieldError("id", getText("MSE008"));
-				}
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+//		If the user ID is not half-width alphanumeric characters
+		else if (!AppService.checkHalfWidthCaracter(getId())) {
+			addFieldError("id", getText("MSE002"));
+		}
+//		Duplicate user ID
+		else {
+			User user = User.find(getId());
+			if (user.getId() != null) {
+				addFieldError("id", getText("MSE003"));
 			}
+		}
+//		No password entered
+		if (getPassword().length() == 0) {
+			addFieldError("password", getText("MSE005"));
+		}
+//		If the password is not half-width alphanumeric characters
+		else if (!AppService.checkHalfWidthCaracter(getPassword())) {
+			addFieldError("password", getText("MSE006"));
+		}
+//		If password re-entry is not entered
+		if (getPasswordConfirmation().length() == 0) {
+			addFieldError("passwordConfirmation", getText("MSE005"));
+		}
+//		If password re-entry is other than half-width alphanumeric characters
+		else if (!AppService.checkHalfWidthCaracter(getPasswordConfirmation())) {
+			addFieldError("passwordConfirmation", getText("MSE008"));
+		}
+//		If the re-entered password does not match the entered password
+		else if (!getPassword().equals(getPasswordConfirmation())) {
+			addFieldError("passwordConfirmation", getText("MSE025"));
+		}
+//		No name entered
 		if (getName().length() == 0) {
 			addFieldError("name", getText("MSE009"));
+		}
+//		If the name is not full-width
+		else if (AppService.checkHalfWidthCaracter(getName())) {
+			addFieldError("name", getText("MSE010"));
+		}
+//		If Kana is not entered
+		if (getNameKatakana().length() == 0) {
+			addFieldError("nameKatakana", getText("MSE012"));
+		}
+//		If Kana is not half-width
+		else if (!AppService.checkHalfWidthCaracter(getNameKatakana())) {
+			addFieldError("nameKatakana", getText("MSE013"));
+		}
+//		If date of birth is not entered
+		if (getDateOfBirth().length() == 0) {
+			addFieldError("dateOfBirth", getText("MSE016"));
+		}
+//		If the date of birth is not half-width alphanumeric characters
+		else if (!AppService.checkHalfWidthCaracter(getDateOfBirth())) {
+			addFieldError("dateOfBirth", getText("MSE017"));
+		}
+//		If the date of birth is incorrect
+		else if (!AppService.checkCorrectDateOfBirth(getDateOfBirth())) {
+			addFieldError("dateOfBirth", getText("MSE018"));
+		}
+//		If the committee is not full-width
+		if (getClub().length() > 0 && AppService.checkHalfWidthCaracter(getClub())) {
+			addFieldError("club", getText("MSE019"));
 		}
 	}
 

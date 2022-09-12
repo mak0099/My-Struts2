@@ -39,8 +39,6 @@
 			    </td>
 			</tr> 
 		</s:form>
-		<a href="search.jsp">Search</a>
-		<a href="registration-confirmation.jsp">Registration Confirmation</a>
 	</center>
 </body>
 </html>

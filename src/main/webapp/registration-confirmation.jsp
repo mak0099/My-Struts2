@@ -28,7 +28,7 @@
 				</tbody>
 			</table>
 			<div style="padding:15px">
-				<s:textfield type="button" property="back" value="%{getText('Registration.ButtonBack')}" theme="simple" onclick="window.location = 'search.jsp'" />
+				<s:textfield type="button" value="%{getText('Registration.ButtonBack')}" theme="simple" onclick="history.back()" />
 				<s:submit value="%{getText('Registration.ButtonSubmit')}" theme="simple" />
 			</div>
 		</s:form>

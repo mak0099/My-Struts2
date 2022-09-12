@@ -1,26 +1,26 @@
 package com.mystruts.actions;
-
-import java.io.UnsupportedEncodingException;
-
+import com.mystruts.models.User;
+import com.mystruts.services.AppService;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
 public class CheckAvailabilityAction extends ActionSupport {
 	public void validate() {
+//		If no user ID is entered
 		if (getId().length() == 0) {
 			addFieldError("id", getText("MSE001"));
 		}
-		// check already exist ID
-
-		else
-			try {
-				if (getId().getBytes("MS932").length > getId().length()) {
-					addFieldError("id", getText("MSE008"));
-				}
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+//		If the user ID is not half-width alphanumeric characters
+		else if (!AppService.checkHalfWidthCaracter(getId())) {
+			addFieldError("id", getText("MSE002"));
+		}
+//		Duplicate user ID
+		else {
+			User user = User.find(getId());
+			if (user.getId() != null) {
+				addFieldError("id", getText("MSE003"));
 			}
+		}
 	}
 	public String execute() {
 		setIdAvailability(true);
