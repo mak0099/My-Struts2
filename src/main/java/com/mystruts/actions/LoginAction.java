@@ -24,11 +24,17 @@ public class LoginAction extends ActionSupport {
 		}
 	}
 	public String execute() {
-		User user = User.authenticate(getId(), getPassword());
+		User user = User.find(getId());
 		if(user.getId() != null) {
-			return "success";
+			if(user.getPassword().equals(getPassword())) {
+				addActionMessage(getText("MSI010"));
+				return "success";
+			}else {
+				addActionError(getText("MSE007"));
+			}
+		}else {
+			addActionError(getText("MSE004"));
 		}
-		addActionError("Username or password is wrong!");
 		return "input";
 	}
 

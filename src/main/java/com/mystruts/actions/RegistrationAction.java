@@ -6,7 +6,24 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
 public class RegistrationAction extends ActionSupport {
-	public void validate() {
+	public void validateCheckAvailability() {
+//		If no user ID is entered
+		if (getId().length() == 0) {
+			addFieldError("id", getText("MSE001"));
+		}
+//		If the user ID is not half-width alphanumeric characters
+		else if (!AppService.checkHalfWidthCaracter(getId())) {
+			addFieldError("id", getText("MSE002"));
+		}
+//		Duplicate user ID
+		else {
+			User user = User.find(getId());
+			if (user.getId() != null) {
+				addFieldError("id", getText("MSE003"));
+			}
+		}
+	}
+	public void validateExecute() {
 //		If no user ID is entered
 		if (getId().length() == 0) {
 			addFieldError("id", getText("MSE001"));
@@ -75,20 +92,31 @@ public class RegistrationAction extends ActionSupport {
 			addFieldError("club", getText("MSE019"));
 		}
 	}
-
+	public String checkAvailability() {
+		setIdAvailability(true);
+		return "success";
+	}
 	public String execute() {
+		return "success";
+	}
+	public String back() {
 		return "success";
 	}
 
 	public String confirmRegistration() {
-		User user = new User();
-		user.setId(id);
-		user.setPassword(password);
-		user.setName(name);
-		user.setNameKatakana(nameKatakana);
-		user.setDateOfBirth(dateOfBirth);
-		user.setClub(club);
-		user.save();
+		try {
+			User user = new User();
+			user.setId(id);
+			user.setPassword(password);
+			user.setName(name);
+			user.setNameKatakana(nameKatakana);
+			user.setDateOfBirth(dateOfBirth);
+			user.setClub(club);
+			user.save();
+			addActionMessage(getText("MSI007"));
+		} catch (Exception e) {
+			addActionError(getText("MSE024"));
+		}
 		return "success";
 	}
 
@@ -99,6 +127,7 @@ public class RegistrationAction extends ActionSupport {
 	private String nameKatakana;
 	private String dateOfBirth;
 	private String club;
+	private boolean idAvailability;
 
 	public String getId() {
 		return id;
@@ -154,5 +183,11 @@ public class RegistrationAction extends ActionSupport {
 
 	public void setClub(String club) {
 		this.club = club;
+	}
+	public boolean isIdAvailability() {
+		return idAvailability;
+	}
+	public void setIdAvailability(boolean idAvailability) {
+		this.idAvailability = idAvailability;
 	}
 }

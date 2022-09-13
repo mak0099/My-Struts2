@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Registration</title>
+<title><s:text name="Registration.Title"/></title>
 <style>
 .tdErrorMessage{
 	text-align: right;
@@ -21,7 +21,6 @@
 <body>
 	<center>
 		<h1><s:text name="Registration.Heading" /></h1>
-		<h1></h1>
 		<s:form method="post" action="submitRegistration">
 			<s:textfield name="id" label="%{getText('Registration.ID')}" errorPosition="bottom"/>
 			<tr><td colspan="2" class="tdSuccessMessage"><s:if test="idAvailability"><s:text name="MSI004" /></s:if></td></tr>

@@ -164,6 +164,7 @@ public class UserDao {
 			rs.next();
 			user.setId(rs.getString("ID"));
 			user.setName(rs.getString("NAME"));
+			user.setPassword(rs.getString("PASS"));
 			user.setNameKatakana(rs.getString("KANA"));
 			rs.close();
 			ps.close();

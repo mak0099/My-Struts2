@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Registration Confirmation</title>
+<title><s:text name="RegConfirmation.Title"/></title>
 </head>
 <body>
 	<center>
 		<h1><s:text name="RegConfirmation.Heading"/></h1>
-			
+		<h3><s:text name="MSI006"/></h3>
 		<s:form action="confirmRegistration" method="POST">
 			<table border="1">
 				<thead>
@@ -28,12 +28,10 @@
 				</tbody>
 			</table>
 			<div style="padding:15px">
-				<s:textfield type="button" value="%{getText('Registration.ButtonBack')}" theme="simple" onclick="history.back()" />
-				<s:submit value="%{getText('Registration.ButtonSubmit')}" theme="simple" />
+				<s:submit value="%{getText('Registration.ButtonBack')}" theme="simple" action="backToRegistration" />
+				<s:submit value="%{getText('Registration.ButtonSubmit')}" onclick="return confirm('%{getText('MSI003')}')" theme="simple" />
 			</div>
 		</s:form>
-		<a href="search.jsp">Search</a>
-		<a href="registration.jsp">Registration</a>
 	</center>
 </body>
 </html>
