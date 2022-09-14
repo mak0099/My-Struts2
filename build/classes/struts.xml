@@ -9,11 +9,15 @@
 	<constant name="struts.mapper.action.prefix.enabled" value="true" />
     <package name="basicstruts2" extends="struts-default">
         <action name="index">
-            <result>/login.jsp</result>
+            <result name="success" type="redirect">login.jsp</result>
         </action>
         <action name="submitLogin" class="com.mystruts.actions.LoginAction">
         	<result name="success">/search.jsp</result>
         	<result name="input">/login.jsp</result>
+        </action>
+        <action name="submitSearch" class="com.mystruts.actions.SearchAction">
+        	<result name="success">/search.jsp</result>
+        	<result name="input">/search.jsp</result>
         </action>
         <action name="checkAvailability" class="com.mystruts.actions.RegistrationAction" method="checkAvailability">
         	<result name="success">/registration.jsp</result>
@@ -23,9 +27,9 @@
         	<result name="success">/registration-confirmation.jsp</result>
         	<result name="input">/registration.jsp</result>
         </action>
-        <action name="backToRegistration" class="com.mystruts.actions.RegistrationAction" method="back">
-        	<result name="success">/registration.jsp</result>
-        </action>
+<!--         <action name="backToRegistration" class="com.mystruts.actions.RegistrationAction" method="back"> -->
+<!--         	<result name="success">/registration.jsp</result> -->
+<!--         </action> -->
         <action name="confirmRegistration" class="com.mystruts.actions.RegistrationAction" method="confirmRegistration">
         	<result name="success">/search.jsp</result>
         	<result name="input">/registration.jsp</result>

@@ -1,5 +1,7 @@
 package com.mystruts.actions;
 
+import java.util.Date;
+
 import com.mystruts.models.User;
 import com.mystruts.services.AppService;
 import com.opensymphony.xwork2.ActionSupport;
@@ -76,11 +78,11 @@ public class RegistrationAction extends ActionSupport {
 			addFieldError("nameKatakana", getText("MSE013"));
 		}
 //		If date of birth is not entered
-		if (getDateOfBirth().length() == 0) {
+		if (getDateOfBirth() == null) {
 			addFieldError("dateOfBirth", getText("MSE016"));
 		}
 //		If the date of birth is not half-width alphanumeric characters
-		else if (!AppService.checkHalfWidthCaracter(getDateOfBirth())) {
+		else if (!AppService.checkHalfWidthCaracter(getDateOfBirth().toString())) {
 			addFieldError("dateOfBirth", getText("MSE017"));
 		}
 //		If the date of birth is incorrect
@@ -97,9 +99,6 @@ public class RegistrationAction extends ActionSupport {
 		return "success";
 	}
 	public String execute() {
-		return "success";
-	}
-	public String back() {
 		return "success";
 	}
 
@@ -125,7 +124,7 @@ public class RegistrationAction extends ActionSupport {
 	private String passwordConfirmation;
 	private String name;
 	private String nameKatakana;
-	private String dateOfBirth;
+	private Date dateOfBirth;
 	private String club;
 	private boolean idAvailability;
 
@@ -169,11 +168,11 @@ public class RegistrationAction extends ActionSupport {
 		this.nameKatakana = nameKatakana;
 	}
 
-	public String getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(String dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

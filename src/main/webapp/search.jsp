@@ -26,10 +26,45 @@
 		<s:if test="hasActionErrors()">
 		     <s:actionerror/>
 		</s:if>
-		<a href="login.jsp">Login</a>
-		<a href="registration.jsp">New Registration</a>
-		<a href="edit.jsp">Edit</a>
-		<a href="delete-confirmation.jsp">Delete Confirmation</a>
+		<s:form action="submitSearch">
+			<table border="1" style="border-collapse: collapse">
+				<s:textfield name="id" label="%{getText('Search.ID')}" errorPosition="bottom" />
+				<s:textfield name="name" label="%{getText('Search.Name')}" errorPosition="bottom" />
+				<s:textfield name="nameKatakana" label="%{getText('Search.NameKatakana')}" errorPosition="bottom" />
+			</table>
+			<div style="margin: 10px auto">
+				<button type="submit"><s:text name="Search.ButtonSearch"/></button>
+				<button type="button" onclick="window.location='registration.jsp'"><s:text name="Search.ButtonNewRegistration"/></button>
+				<button type="button" onclick="window.location='login.jsp'"><s:text name="Search.ButtonLogout"/></button>
+			</div>
+		</s:form>
+		<table border="1" style="border-collapse: collapse">
+			<thead>
+				<tr>
+					<th><s:text name="Search.ID"/></th>
+					<th><s:text name="Search.Name"/></th>
+					<th><s:text name="Search.NameKatakana"/></th>
+					<th><s:text name="Search.DateOfBirth"/></th>
+					<th><s:text name="Search.Club"/></th>
+					<th><s:text name="Search.Action"/></th>
+				</tr>
+			</thead>
+			<tbody>
+				<s:iterator value="userList" > 
+				<tr>
+					<td><s:property value="id"/></td>
+					<td><s:property value="name"/></td>
+					<td><s:property value="nameKatakana"/></td>
+					<td><s:date name="dateOfBirth" format = "yyyy/MM/dd" /></td>
+					<td><s:property value="club"/></td>
+					<td>
+						<button type="submit"><s:text name="Search.ButtonEdit"/></button>
+						<button type="submit"><s:text name="Search.ButtonDelete"/></button>
+					</td>
+				</tr>
+				</s:iterator>
+			</tbody>
+		</table>
 	</center>
 </body>
 </html>

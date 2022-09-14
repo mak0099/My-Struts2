@@ -4,58 +4,31 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import com.mystruts.connections.OracleCon;
 import com.mystruts.models.User;
 
 public class UserDao {
-	public static ArrayList<User> search(String term) {
+	public static ArrayList<User> search(String id, String name, String kana) {
 		Connection con = new OracleCon().getCon();
 		ArrayList<User> userList = new ArrayList<User>();
-		String sql = "SELECT * FROM USERS " + "WHERE (NAME LIKE ? OR ID LIKE ?) AND delete_datetime IS NULL";
+		String sql = "SELECT * FROM USERS u LEFT JOIN USERDETAILS ud ON u.ID=ud.ID WHERE (u.ID LIKE ? OR u.NAME LIKE ? OR u.KANA LIKE ?)";
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setString(1, '%' + term + '%');
-			ps.setString(2, '%' + term + '%');
+//			if(id.length() > 0) {
+			ps.setString(1, id.length()>0 ? '%' + id + '%' : null);
+			ps.setString(2, name.length()>0 ? '%' + name + '%' : null);
+			ps.setString(3, kana.length()>0 ? '%' + kana + '%' : null);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				User user = new User();
 				user.setId(rs.getString("ID"));
 				user.setName(rs.getString("NAME"));
-				userList.add(user);
-			}
-			rs.close();
-			ps.close();
-			con.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return userList;
-	}
-
-	public static ArrayList<User> get() {
-		return search("");
-	}
-
-	public static ArrayList<User> getUserReport() {
-		Connection con = new OracleCon().getCon();
-		ArrayList<User> userList = new ArrayList<User>();
-		String sql = "SELECT p.*, SUM(s.quantity) sales_count\n" + "FROM USERS p \n" + "LEFT JOIN t_sales s \n"
-				+ "ON p.ID = s.ID \n" + "WHERE p.delete_datetime IS NULL \n"
-				+ "GROUP BY ID";
-		PreparedStatement ps;
-		try {
-			ps = con.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				User user = new User();
-				user.setId(rs.getString("ID"));
-				user.setName(rs.getString("NAME"));
+				user.setNameKatakana(rs.getString("KANA"));
+				user.setDateOfBirth(rs.getTimestamp("BIRTH"));
+				user.setClub(rs.getString("CLUB"));
 				userList.add(user);
 			}
 			rs.close();
@@ -81,10 +54,8 @@ public class UserDao {
 				ps1.setString(4, user.getNameKatakana());
 				ps1.execute();
 
-				DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-				Date dob = formatter.parse(user.getDateOfBirth());
 				ps2.setString(1, user.getId());
-				ps2.setDate(2, new java.sql.Date(dob.getTime()));
+				ps2.setDate(2, new java.sql.Date(user.getDateOfBirth().getTime()));
 				ps2.setString(3, user.getClub());
 				ps2.execute();
 				

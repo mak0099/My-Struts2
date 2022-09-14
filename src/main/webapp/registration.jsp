@@ -21,7 +21,7 @@
 <body>
 	<center>
 		<h1><s:text name="Registration.Heading" /></h1>
-		<s:form method="post" action="submitRegistration">
+		<s:form action="submitRegistration">
 			<s:textfield name="id" label="%{getText('Registration.ID')}" errorPosition="bottom"/>
 			<tr><td colspan="2" class="tdSuccessMessage"><s:if test="idAvailability"><s:text name="MSI004" /></s:if></td></tr>
 			<s:submit value="%{getText('Registration.ButtonCheckAvailability')}" action="checkAvailability" style="float: right; margin: 5px 0" />
@@ -33,7 +33,7 @@
 			<s:textfield name="club" label="%{getText('Registration.Club')}" errorPosition="bottom" />
 			<tr>
 			    <td colspan="2" style="text-align:right; padding-top:5px">
-					<s:textfield type="button" property="back" value="%{getText('Registration.ButtonBack')}" theme="simple" onclick="window.location = 'search.jsp'" />
+					<s:textfield type="button" value="%{getText('Registration.ButtonBack')}" theme="simple"  onclick="history.back()" />
 					<s:submit property="submit" value="%{getText('Registration.ButtonSubmit')}" theme="simple" />
 			    </td>
 			</tr> 

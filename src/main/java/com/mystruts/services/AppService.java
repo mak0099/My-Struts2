@@ -1,6 +1,7 @@
 package com.mystruts.services;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 
 public class AppService {
 	
@@ -14,7 +15,7 @@ public class AppService {
 		}
 		return true;
 	}
-	public static boolean checkCorrectDateOfBirth(String str) {
+	public static boolean checkCorrectDateOfBirth(Date str) {
 		return true;
 	}
 }

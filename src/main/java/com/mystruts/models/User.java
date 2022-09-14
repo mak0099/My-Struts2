@@ -1,5 +1,8 @@
 package com.mystruts.models;
 
+
+import java.util.Date;
+
 import com.mystruts.models.dao.UserDao;
 
 public class User extends UserDao {
@@ -8,7 +11,7 @@ public class User extends UserDao {
 	private String passwordConfirmation;
 	private String name;
 	private String nameKatakana;
-	private String dateOfBirth;
+	private Date dateOfBirth;
 	private String club;
 
 	public String getId() {
@@ -51,11 +54,11 @@ public class User extends UserDao {
 		this.nameKatakana = nameKatakana;
 	}
 
-	public String getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(String dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
