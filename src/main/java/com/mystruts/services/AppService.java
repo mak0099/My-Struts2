@@ -15,7 +15,11 @@ public class AppService {
 		}
 		return true;
 	}
-	public static boolean checkCorrectDateOfBirth(Date str) {
+	public static boolean checkCorrectDateOfBirth(Date date) {
+		int diff = date.compareTo(new Date());
+		if(diff > 0) {
+			return false;
+		}
 		return true;
 	}
 }

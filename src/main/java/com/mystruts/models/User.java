@@ -1,6 +1,8 @@
 package com.mystruts.models;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.mystruts.models.dao.UserDao;
@@ -81,5 +83,10 @@ public class User extends UserDao {
 	public User delete() {
 		deleteUser(this);
 		return this;
+	}
+	public String dateOfBirthformat(String format) {
+		DateFormat formatter = new SimpleDateFormat(format);
+		String formatedDate = formatter.format(dateOfBirth);
+		return formatedDate;
 	}
 }

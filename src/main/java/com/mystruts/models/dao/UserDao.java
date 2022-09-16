@@ -75,13 +75,28 @@ public class UserDao {
 	public static void updateUser(User user) {
 		Connection con = new OracleCon().getCon();
 		try {
-			String sql = "UPDATE USERS SET NAME = ?, price = ?, update_datetime = CURRENT_TIMESTAMP \n"
-					+ "WHERE ID = ?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, user.getId());
-			ps.setString(2, user.getName());
-			ps.execute();
-			ps.close();
+			con.setAutoCommit(false);
+			String sql1 = "UPDATE USERS SET NAME = ?, KANA = ? WHERE ID = ?";
+			String sql2 = "UPDATE USERDETAILS SET BIRTH = ?, CLUB = ? WHERE ID = ?";
+			try(PreparedStatement ps1 = con.prepareStatement(sql1);
+					PreparedStatement ps2 = con.prepareStatement(sql2)) {
+				ps1.setString(1, user.getName());
+				ps1.setString(2, user.getNameKatakana());
+				ps1.setString(3, user.getId());
+				ps1.execute();
+
+				ps2.setDate(1, new java.sql.Date(user.getDateOfBirth().getTime()));
+				ps2.setString(2, user.getClub());
+				ps2.setString(3, user.getId());
+				ps2.execute();
+				
+				con.commit();
+				ps1.close();
+				
+			} catch (SQLException e) {
+				con.rollback();
+				e.printStackTrace();
+			}
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,8 +106,7 @@ public class UserDao {
 	public static void deleteUser(User user) {
 		Connection con = new OracleCon().getCon();
 		try {
-			String sql = "UPDATE USERS SET delete_datetime = CURRENT_TIMESTAMP \n"
-					+ "WHERE ID = ?";
+			String sql = "DELETE USERS WHERE ID = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, user.getId());
 			ps.execute();
@@ -128,7 +142,7 @@ public class UserDao {
 		Connection con = new OracleCon().getCon();
 		User user = new User();
 		try {
-			String sql = "SELECT * FROM USERS WHERE ID=?";
+			String sql = "SELECT * FROM USERS u LEFT JOIN USERDETAILS ud ON u.ID=ud.ID WHERE u.ID=?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, ID);
 			ResultSet rs = ps.executeQuery();
@@ -137,6 +151,8 @@ public class UserDao {
 			user.setName(rs.getString("NAME"));
 			user.setPassword(rs.getString("PASS"));
 			user.setNameKatakana(rs.getString("KANA"));
+			user.setDateOfBirth(rs.getTimestamp("BIRTH"));
+			user.setClub(rs.getString("CLUB"));
 			rs.close();
 			ps.close();
 			con.close();

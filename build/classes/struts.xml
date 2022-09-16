@@ -27,13 +27,33 @@
         	<result name="success">/registration-confirmation.jsp</result>
         	<result name="input">/registration.jsp</result>
         </action>
-<!--         <action name="backToRegistration" class="com.mystruts.actions.RegistrationAction" method="back"> -->
-<!--         	<result name="success">/registration.jsp</result> -->
-<!--         </action> -->
         <action name="confirmRegistration" class="com.mystruts.actions.RegistrationAction" method="confirmRegistration">
         	<result name="success">/search.jsp</result>
         	<result name="input">/registration.jsp</result>
         </action>
+        <action name="editUser" class="com.mystruts.actions.EditAction">
+        	<result name="success">/edit.jsp</result>
+        	<result name="404">/404.jsp</result>
+        </action>
+        <action name="submitEdit" class="com.mystruts.actions.UpdateAction">
+        	<result name="success">/edit-confirmation.jsp</result>
+        	<result name="input">/edit.jsp</result>
+        </action>
+        <action name="confirmEdit" class="com.mystruts.actions.UpdateAction" method="confirmEdit">
+        	<result name="success">/search.jsp</result>
+        	<result name="input">/edit.jsp</result>
+        </action>
+        <action name="deleteUser" class="com.mystruts.actions.DeleteAction">
+        	<result name="success">/delete-confirmation.jsp</result>
+        	<result name="input">/404.jsp</result>
+        </action>
+        <action name="confirmDelete" class="com.mystruts.actions.DeleteAction" method="confirmDelete">
+        	<result name="success">/search.jsp</result>
+        	<result name="input">/404.jsp</result>
+        </action>
+<!--         <action name="backToRegistration" class="com.mystruts.actions.RegistrationAction" method="back"> -->
+<!--         	<result name="success">/registration.jsp</result> -->
+<!--         </action> -->
     </package>
 
 </struts>

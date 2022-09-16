@@ -38,6 +38,7 @@
 				<button type="button" onclick="window.location='login.jsp'"><s:text name="Search.ButtonLogout"/></button>
 			</div>
 		</s:form>
+		<s:if test="!userList.isEmpty()">
 		<table border="1" style="border-collapse: collapse">
 			<thead>
 				<tr>
@@ -50,21 +51,25 @@
 				</tr>
 			</thead>
 			<tbody>
-				<s:iterator value="userList" > 
+				<s:iterator value="userList" var="user" > 
 				<tr>
 					<td><s:property value="id"/></td>
 					<td><s:property value="name"/></td>
 					<td><s:property value="nameKatakana"/></td>
-					<td><s:date name="dateOfBirth" format = "yyyy/MM/dd" /></td>
+					<td><s:date name="dateOfBirth" format="yyyy/MM/dd" /></td>
 					<td><s:property value="club"/></td>
 					<td>
-						<button type="submit"><s:text name="Search.ButtonEdit"/></button>
-						<button type="submit"><s:text name="Search.ButtonDelete"/></button>
+						<form>
+							<input name="id" type="hidden" value="<s:property value="id"/>" />
+							<button type="submit" formaction="editUser"><s:text name="Search.ButtonEdit"/></button>
+							<button type="submit" formaction="deleteUser"><s:text name="Search.ButtonDelete"/></button>
+						</form>
 					</td>
 				</tr>
 				</s:iterator>
 			</tbody>
 		</table>
+		</s:if>
 	</center>
 </body>
 </html>
