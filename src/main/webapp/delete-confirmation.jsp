@@ -32,7 +32,7 @@
 				<tbody>
 					<s:textfield name="id" label="%{getText('Edit.ID')}" errorPosition="bottom" readonly="true"/>
 					<s:textfield value="%{user.name}" label="%{getText('Edit.Name')}" errorPosition="bottom" readonly="true"/>
-					<s:textfield value="%{user.nameKatakana}" label="%{getText('Edit.NameKatakana')}" errorPosition="bottom" readonly="true"/>
+					<s:textfield value="%{user.kana}" label="%{getText('Edit.Kana')}" errorPosition="bottom" readonly="true"/>
 					<s:textfield value="%{user.dateOfBirthformat('yyyy-MM-dd')}" label="%{getText('Edit.DateOfBirth')}" errorPosition="bottom" readonly="true" />
 					<s:textfield value="%{user.club}" label="%{getText('Edit.Club')}" errorPosition="bottom" readonly="true" />					
 				</tbody>

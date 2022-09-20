@@ -10,7 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class SearchAction extends ActionSupport {
 	public void validate() {
 //		If nothing is entered in any text box
-		if (getId() != null && getId().length() == 0 && getName() != null && getName().length() == 0 && getNameKatakana() != null && getNameKatakana().length() == 0) {
+		if (getId() != null && getId().length() == 0 && getName() != null && getName().length() == 0 && getKana() != null && getKana().length() == 0) {
 			addActionError(getText("MSE015"));
 		}
 //		If the user ID is not half-width alphanumeric characters
@@ -22,18 +22,18 @@ public class SearchAction extends ActionSupport {
 			addActionError(getText("MSE010"));
 		}
 //		If Kana is not half-width
-		if (getNameKatakana() != null && !AppService.checkHalfWidthCaracter(getNameKatakana())) {
+		if (getKana() != null && !AppService.checkHalfWidthCaracter(getKana())) {
 			addActionError(getText("MSE013"));
 		}
 	}
 	public String execute() {
-		setUserList(User.search(getId(), getName(), getNameKatakana()));
+		setUserList(User.search(getId(), getName(), getKana()));
 		return "success";
 	}
 
 	private String id;
 	private String name;
-	private String nameKatakana;
+	private String kana;
 	private ArrayList<User> userList;
 
 	public String getId() {
@@ -52,12 +52,12 @@ public class SearchAction extends ActionSupport {
 		this.name = name;
 	}
 
-	public String getNameKatakana() {
-		return nameKatakana;
+	public String getKana() {
+		return kana;
 	}
 
-	public void setNameKatakana(String nameKatakana) {
-		this.nameKatakana = nameKatakana;
+	public void setKana(String kana) {
+		this.kana = kana;
 	}
 	public ArrayList<User> getUserList() {
 		return userList;

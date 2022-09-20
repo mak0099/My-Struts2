@@ -24,7 +24,7 @@
 		<s:form action="submit-edit" method="get">
 			<s:textfield name="id" label="%{getText('Edit.ID')}" errorPosition="bottom" readonly="true"/>
 			<s:textfield name="name" value="%{user.name}" label="%{getText('Edit.Name')}" errorPosition="bottom"/>
-			<s:textfield name="nameKatakana" value="%{user.nameKatakana}" label="%{getText('Edit.NameKatakana')}" errorPosition="bottom"/>
+			<s:textfield name="kana" value="%{user.kana}" label="%{getText('Edit.Kana')}" errorPosition="bottom"/>
 			<s:textfield type="date" name="dateOfBirth" value="%{user.dateOfBirthformat('yyyy-MM-dd')}" label="%{getText('Edit.DateOfBirth')}" errorPosition="bottom" />
 			<s:textfield name="club" value="%{user.club}" label="%{getText('Edit.Club')}" errorPosition="bottom" />
 			<tr>

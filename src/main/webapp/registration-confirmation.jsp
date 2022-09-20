@@ -22,7 +22,7 @@
 					<s:textfield name="id" label="%{getText('RegConfirmation.ID')}" readonly="true" />
 					<s:textfield name="password" type="password" label="%{getText('RegConfirmation.Password')}" readonly="true" />
 					<s:textfield name="name" label="%{getText('RegConfirmation.Name')}" readonly="true" />
-					<s:textfield name="nameKatakana" label="%{getText('RegConfirmation.NameKatakana')}" readonly="true" />
+					<s:textfield name="kana" label="%{getText('RegConfirmation.Kana')}" readonly="true" />
 					<s:textfield name="dateOfBirth" label="%{getText('RegConfirmation.DateOfBirth')}" readonly="true" />
 					<s:textfield name="club" label="%{getText('RegConfirmation.Club')}" readonly="true" />
 				</tbody>

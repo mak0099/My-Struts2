@@ -17,12 +17,12 @@ public class UpdateAction extends ActionSupport implements ModelDriven<User> {
 			addFieldError("name", getText("MSE010"));
 		}
 //		If Kana is not entered
-		if (user.getNameKatakana().length() == 0) {
-			addFieldError("nameKatakana", getText("MSE012"));
+		if (user.getKana().length() == 0) {
+			addFieldError("kana", getText("MSE012"));
 		}
 //		If Kana is not half-width
-		else if (!AppService.checkHalfWidthCaracter(user.getNameKatakana())) {
-			addFieldError("nameKatakana", getText("MSE013"));
+		else if (!AppService.checkHalfWidthCaracter(user.getKana())) {
+			addFieldError("kana", getText("MSE013"));
 		}
 //		If date of birth is not entered
 		if (user.getDateOfBirth() == null) {

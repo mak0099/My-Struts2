@@ -20,7 +20,7 @@
 				<tbody>
 					<s:textfield name="id" label="%{getText('EditConfirmation.ID')}" readonly="true" />
 					<s:textfield name="name" label="%{getText('EditConfirmation.Name')}" readonly="true" />
-					<s:textfield name="nameKatakana" label="%{getText('EditConfirmation.NameKatakana')}" readonly="true" />
+					<s:textfield name="kana" label="%{getText('EditConfirmation.Kana')}" readonly="true" />
 					<s:textfield name="dateOfBirth" label="%{getText('EditConfirmation.DateOfBirth')}" readonly="true" />
 					<s:textfield name="club" label="%{getText('EditConfirmation.Club')}" readonly="true" />
 				</tbody>

@@ -12,7 +12,7 @@ public class User extends UserDao {
 	private String password;
 	private String passwordConfirmation;
 	private String name;
-	private String nameKatakana;
+	private String kana;
 	private Date dateOfBirth;
 	private String club;
 
@@ -48,12 +48,12 @@ public class User extends UserDao {
 		this.name = name;
 	}
 
-	public String getNameKatakana() {
-		return nameKatakana;
+	public String getKana() {
+		return kana;
 	}
 
-	public void setNameKatakana(String nameKatakana) {
-		this.nameKatakana = nameKatakana;
+	public void setKana(String kana) {
+		this.kana = kana;
 	}
 
 	public Date getDateOfBirth() {

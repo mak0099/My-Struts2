@@ -25,7 +25,7 @@ public class UserDao {
 				User user = new User();
 				user.setId(rs.getString("ID"));
 				user.setName(rs.getString("NAME"));
-				user.setNameKatakana(rs.getString("KANA"));
+				user.setKana(rs.getString("KANA"));
 				user.setDateOfBirth(rs.getTimestamp("BIRTH"));
 				user.setClub(rs.getString("CLUB"));
 				userList.add(user);
@@ -50,7 +50,7 @@ public class UserDao {
 				ps1.setString(1, user.getId());
 				ps1.setString(2, user.getPassword());
 				ps1.setString(3, user.getName());
-				ps1.setString(4, user.getNameKatakana());
+				ps1.setString(4, user.getKana());
 				ps1.execute();
 
 				ps2.setString(1, user.getId());
@@ -82,7 +82,7 @@ public class UserDao {
 			try(PreparedStatement ps1 = con.prepareStatement(sql1);
 					PreparedStatement ps2 = con.prepareStatement(sql2)) {
 				ps1.setString(1, user.getName());
-				ps1.setString(2, user.getNameKatakana());
+				ps1.setString(2, user.getKana());
 				ps1.setString(3, user.getId());
 				ps1.execute();
 
@@ -147,7 +147,7 @@ public class UserDao {
 			rs.next();
 			user.setId(rs.getString("ID"));
 			user.setName(rs.getString("NAME"));
-			user.setNameKatakana(rs.getString("KANA"));
+			user.setKana(rs.getString("KANA"));
 			rs.close();
 			ps.close();
 			con.close();
@@ -168,7 +168,7 @@ public class UserDao {
 			user.setId(rs.getString("ID"));
 			user.setName(rs.getString("NAME"));
 			user.setPassword(rs.getString("PASS"));
-			user.setNameKatakana(rs.getString("KANA"));
+			user.setKana(rs.getString("KANA"));
 			user.setDateOfBirth(rs.getTimestamp("BIRTH"));
 			user.setClub(rs.getString("CLUB"));
 			rs.close();

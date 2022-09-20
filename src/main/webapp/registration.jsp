@@ -28,7 +28,7 @@
 			<s:textfield type="password" name="password" label="%{getText('Registration.Password')}" errorPosition="bottom"/>
 			<s:textfield type="password" name="passwordConfirmation" label="%{getText('Registration.ReEnterPassword')}" errorPosition="bottom"/>
 			<s:textfield name="name" label="%{getText('Registration.Name')}" errorPosition="bottom"/>
-			<s:textfield name="nameKatakana" label="%{getText('Registration.NameKatakana')}" errorPosition="bottom"/>
+			<s:textfield name="kana" label="%{getText('Registration.Kana')}" errorPosition="bottom"/>
 			<s:textfield type="date" name="dateOfBirth" value="%{user.dateOfBirthformat('yyyy-MM-dd')}" label="%{getText('Registration.DateOfBirth')}" errorPosition="bottom" />
 			<s:textfield name="club" label="%{getText('Registration.Club')}" errorPosition="bottom" />
 			<tr>
