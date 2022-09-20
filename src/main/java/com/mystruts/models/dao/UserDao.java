@@ -17,10 +17,9 @@ public class UserDao {
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(sql);
-//			if(id.length() > 0) {
-			ps.setString(1, id.length()>0 ? '%' + id + '%' : null);
-			ps.setString(2, name.length()>0 ? '%' + name + '%' : null);
-			ps.setString(3, kana.length()>0 ? '%' + kana + '%' : null);
+			ps.setString(1, id!=null && id.length()>0 ? '%' + id + '%' : null);
+			ps.setString(2, name!=null && name.length()>0 ? '%' + name + '%' : null);
+			ps.setString(3, kana!=null && kana.length()>0 ? '%' + kana + '%' : null);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				User user = new User();
@@ -40,7 +39,7 @@ public class UserDao {
 		return userList;
 	}
 
-	public static void insertUser(User user) {
+	public static void insertUser(User user) throws Exception {
 		Connection con = new OracleCon().getCon();
 		try {
 			con.setAutoCommit(false);
@@ -65,14 +64,16 @@ public class UserDao {
 			} catch (SQLException e) {
 				con.rollback();
 				e.printStackTrace();
+				throw e;
 			}
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 	}
 
-	public static void updateUser(User user) {
+	public static void updateUser(User user) throws Exception {
 		Connection con = new OracleCon().getCon();
 		try {
 			con.setAutoCommit(false);
@@ -96,24 +97,41 @@ public class UserDao {
 			} catch (SQLException e) {
 				con.rollback();
 				e.printStackTrace();
+				throw e;
 			}
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 	}
 
-	public static void deleteUser(User user) {
+	public static void deleteUser(User user) throws Exception {
 		Connection con = new OracleCon().getCon();
 		try {
-			String sql = "DELETE USERS WHERE ID = ?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, user.getId());
-			ps.execute();
-			ps.close();
+			con.setAutoCommit(false);
+			String sql1 = "DELETE USERS WHERE ID = ?";
+			String sql2 = "DELETE USERDETAILS WHERE ID = ?";
+			try(PreparedStatement ps1 = con.prepareStatement(sql1);
+					PreparedStatement ps2 = con.prepareStatement(sql2)) {
+				ps1.setString(1, user.getId());
+				ps1.execute();
+				
+				ps2.setString(1, user.getId());
+				ps2.execute();
+				
+				con.commit();
+				ps1.close();
+				
+			} catch (SQLException e) {
+				con.rollback();
+				e.printStackTrace();
+				throw e;
+			}
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 	}
 	

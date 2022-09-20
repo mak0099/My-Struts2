@@ -10,7 +10,7 @@
 	<center>
 		<h1><s:text name="RegConfirmation.Heading"/></h1>
 		<h3><s:text name="MSI006"/></h3>
-		<s:form action="confirmRegistration">
+		<s:form action="confirm-registration">
 			<table border="1">
 				<thead>
 					<tr>
@@ -28,8 +28,8 @@
 				</tbody>
 			</table>
 			<div style="padding:15px">
-				<s:textfield type="button" value="%{getText('RegConfirmation.ButtonBack')}" theme="simple" onclick="window.location='registration.jsp'" />
 				<s:submit value="%{getText('RegConfirmation.ButtonSubmit')}" onclick="return confirm('%{getText('MSI003')}')" theme="simple" />
+				<s:textfield type="button" value="%{getText('RegConfirmation.ButtonBack')}" theme="simple" onclick="history.back();" />
 			</div>
 		</s:form>
 	</center>

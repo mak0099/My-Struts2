@@ -28,7 +28,7 @@
 		<s:if test="hasActionErrors()">
 		     <s:actionerror/>
 		</s:if>
-		<s:form method="post" action="submitLogin">
+		<s:form method="post" action="submit-login">
 			<s:textfield name="id" label="%{getText('Login.ID')}" errorPosition="bottom"/>
 			<s:textfield type="password" name="password" label="%{getText('Login.Password')}" errorPosition="bottom"/>
 			<tr>

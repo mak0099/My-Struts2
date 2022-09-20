@@ -4,13 +4,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="apache-struts-config-example" version="3.0">
-	<display-name>Example Not Struts Config XML</display-name>
+	<display-name>MyStruts</display-name>
 	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
 		<init-param>
 			<param-name>struts.custom.i18n.resources</param-name>
-			<param-value>ApplicationResources</param-value>
+			<param-value>jp</param-value>
 		</init-param>
 	</filter>
 	<welcome-file-list>     

@@ -9,8 +9,7 @@
 <body>
 	<center>
 		<h1><s:text name="EditConfirmation.Heading"/></h1>
-		<h3><s:text name="MSI006"/></h3>
-		<s:form action="confirmEdit">
+		<s:form action="confirm-edit">
 			<table border="1">
 				<thead>
 					<tr>
@@ -27,8 +26,8 @@
 				</tbody>
 			</table>
 			<div style="padding:15px">
-				<s:textfield type="button" value="%{getText('EditConfirmation.ButtonBack')}" theme="simple" onclick="history.back()" />
 				<s:submit value="%{getText('EditConfirmation.ButtonSubmit')}" onclick="return confirm('%{getText('MSI002')}')" theme="simple" />
+				<s:textfield type="button" value="%{getText('EditConfirmation.ButtonBack')}" theme="simple" onclick="history.back()" />
 			</div>
 		</s:form>
 	</center>

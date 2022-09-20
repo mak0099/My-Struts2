@@ -10,19 +10,19 @@ import com.opensymphony.xwork2.ActionSupport;
 public class SearchAction extends ActionSupport {
 	public void validate() {
 //		If nothing is entered in any text box
-		if (getId().length() == 0 && getName().length() == 0 && getNameKatakana().length() == 0) {
+		if (getId() != null && getId().length() == 0 && getName() != null && getName().length() == 0 && getNameKatakana() != null && getNameKatakana().length() == 0) {
 			addActionError(getText("MSE015"));
 		}
 //		If the user ID is not half-width alphanumeric characters
-		if (!AppService.checkHalfWidthCaracter(getId())) {
+		if (getId() != null && !AppService.checkHalfWidthCaracter(getId())) {
 			addActionError(getText("MSE002"));
 		}
 //		If the name is not full-width
-		if (getName().length() > 0 && AppService.checkHalfWidthCaracter(getName())) {
+		if (getName() != null && getName().length() > 0 && AppService.checkHalfWidthCaracter(getName())) {
 			addActionError(getText("MSE010"));
 		}
 //		If Kana is not half-width
-		if (!AppService.checkHalfWidthCaracter(getNameKatakana())) {
+		if (getNameKatakana() != null && !AppService.checkHalfWidthCaracter(getNameKatakana())) {
 			addActionError(getText("MSE013"));
 		}
 	}

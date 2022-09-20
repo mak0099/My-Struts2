@@ -21,7 +21,7 @@
 <body>
 	<center>
 		<h1><s:text name="DeleteConfirmation.Heading" /></h1>
-		<s:form action="confirmDelete">
+		<s:form action="confirm-delete">
 		<table border="1">
 				<thead>
 					<tr>
@@ -31,15 +31,15 @@
 				</thead>
 				<tbody>
 					<s:textfield name="id" label="%{getText('Edit.ID')}" errorPosition="bottom" readonly="true"/>
-					<s:textfield name="name" value="%{user.name}" label="%{getText('Edit.Name')}" errorPosition="bottom" readonly="true"/>
-					<s:textfield name="nameKatakana" value="%{user.nameKatakana}" label="%{getText('Edit.NameKatakana')}" errorPosition="bottom" readonly="true"/>
-					<s:textfield name="dateOfBirth" value="%{user.dateOfBirthformat('yyyy-MM-dd')}" label="%{getText('Edit.DateOfBirth')}" errorPosition="bottom" readonly="true" />
-					<s:textfield name="club" value="%{user.club}" label="%{getText('Edit.Club')}" errorPosition="bottom" readonly="true" />					
+					<s:textfield value="%{user.name}" label="%{getText('Edit.Name')}" errorPosition="bottom" readonly="true"/>
+					<s:textfield value="%{user.nameKatakana}" label="%{getText('Edit.NameKatakana')}" errorPosition="bottom" readonly="true"/>
+					<s:textfield value="%{user.dateOfBirthformat('yyyy-MM-dd')}" label="%{getText('Edit.DateOfBirth')}" errorPosition="bottom" readonly="true" />
+					<s:textfield value="%{user.club}" label="%{getText('Edit.Club')}" errorPosition="bottom" readonly="true" />					
 				</tbody>
 			</table>
 			<div style="padding:15px">
-				<s:textfield type="button" value="%{getText('DeleteConfirmation.ButtonBack')}" theme="simple" onclick="history.back()" />
 				<s:submit value="%{getText('DeleteConfirmation.ButtonSubmit')}" onclick="return confirm('%{getText('MSI001')}')" theme="simple" />
+				<s:textfield type="button" value="%{getText('DeleteConfirmation.ButtonBack')}" theme="simple" onclick="history.back()" />
 			</div>
 		</s:form>
 	</center>

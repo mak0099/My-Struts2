@@ -71,16 +71,16 @@ public class User extends UserDao {
 	public void setClub(String club) {
 		this.club = club;
 	}
-	public User save() {
+	public User save() throws Exception {
 		insertUser(this);
 		return this;
 	}
-	public User update() {
+	public User update() throws Exception {
 		updateUser(this);
 		return this;
 	}
 	
-	public User delete() {
+	public User delete() throws Exception {
 		deleteUser(this);
 		return this;
 	}

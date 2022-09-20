@@ -21,7 +21,7 @@
 <body>
 	<center>
 		<h1><s:text name="Edit.Heading" /></h1>
-		<s:form action="submitEdit">
+		<s:form action="submit-edit" method="get">
 			<s:textfield name="id" label="%{getText('Edit.ID')}" errorPosition="bottom" readonly="true"/>
 			<s:textfield name="name" value="%{user.name}" label="%{getText('Edit.Name')}" errorPosition="bottom"/>
 			<s:textfield name="nameKatakana" value="%{user.nameKatakana}" label="%{getText('Edit.NameKatakana')}" errorPosition="bottom"/>
@@ -29,8 +29,8 @@
 			<s:textfield name="club" value="%{user.club}" label="%{getText('Edit.Club')}" errorPosition="bottom" />
 			<tr>
 			    <td colspan="2" style="text-align:right; padding-top:5px">
-					<s:textfield type="button" value="%{getText('Edit.ButtonBack')}" theme="simple"  onclick="history.back()" />
 					<s:submit property="submit" value="%{getText('Edit.ButtonSubmit')}" theme="simple" />
+					<s:textfield type="button" value="%{getText('Edit.ButtonBack')}" theme="simple"  onclick="history.back()" />
 			    </td>
 			</tr> 
 		</s:form>

@@ -28,7 +28,6 @@ public class LoginAction extends ActionSupport {
 		if(user.getId() != null) {
 			if(user.getPassword().equals(getPassword())) {
 				addActionMessage(getText("MSI010"));
-				setId(null);
 				setPassword(null);
 				return "success";
 			}else {

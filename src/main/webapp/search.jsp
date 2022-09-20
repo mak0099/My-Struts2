@@ -26,7 +26,7 @@
 		<s:if test="hasActionErrors()">
 		     <s:actionerror/>
 		</s:if>
-		<s:form action="submitSearch">
+		<s:form action="search-user" method="get">
 			<table border="1" style="border-collapse: collapse">
 				<s:textfield name="id" label="%{getText('Search.ID')}" errorPosition="bottom" />
 				<s:textfield name="name" label="%{getText('Search.Name')}" errorPosition="bottom" />
@@ -34,8 +34,8 @@
 			</table>
 			<div style="margin: 10px auto">
 				<button type="submit"><s:text name="Search.ButtonSearch"/></button>
-				<button type="button" onclick="window.location='registration.jsp'"><s:text name="Search.ButtonNewRegistration"/></button>
-				<button type="button" onclick="window.location='login.jsp'"><s:text name="Search.ButtonLogout"/></button>
+				<button type="button" onclick="window.location='new-registration'"><s:text name="Search.ButtonNewRegistration"/></button>
+				<button type="button" onclick="window.location='login-user'"><s:text name="Search.ButtonLogout"/></button>
 			</div>
 		</s:form>
 		<s:if test="!userList.isEmpty()">
@@ -61,8 +61,8 @@
 					<td>
 						<form>
 							<input name="id" type="hidden" value="<s:property value="id"/>" />
-							<button type="submit" formaction="editUser"><s:text name="Search.ButtonEdit"/></button>
-							<button type="submit" formaction="deleteUser"><s:text name="Search.ButtonDelete"/></button>
+							<button type="submit" formaction="edit-user"><s:text name="Search.ButtonEdit"/></button>
+							<button type="submit" formaction="delete-user"><s:text name="Search.ButtonDelete"/></button>
 						</form>
 					</td>
 				</tr>
