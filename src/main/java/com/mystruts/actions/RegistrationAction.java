@@ -13,7 +13,7 @@ public class RegistrationAction extends ActionSupport implements ModelDriven<Use
 			addFieldError("id", getText("MSE001"));
 		}
 //		If the user ID is not half-width alphanumeric characters
-		else if (!AppService.checkHalfWidthCaracter(user.getId())) {
+		if (user.getId() != null && (!AppService.checkHalfWidthCaracter(user.getId()) || AppService.checkContainSymbol(user.getId()))) {
 			addFieldError("id", getText("MSE002"));
 		}
 //		Duplicate user ID

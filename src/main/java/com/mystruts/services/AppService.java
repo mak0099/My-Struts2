@@ -2,6 +2,8 @@ package com.mystruts.services;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AppService {
 	
@@ -14,6 +16,11 @@ public class AppService {
 			e.printStackTrace();
 		}
 		return true;
+	}
+	public static boolean checkContainSymbol(String str) {
+		Pattern p = Pattern.compile("[^a-z0-9]", Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(str);
+		return m.find();
 	}
 	public static boolean checkCorrectDateOfBirth(Date date) {
 		int diff = date.compareTo(new Date());
