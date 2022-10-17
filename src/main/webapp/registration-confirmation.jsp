@@ -20,7 +20,7 @@
 				</thead>
 				<tbody>
 					<s:textfield name="id" label="%{getText('RegConfirmation.ID')}" readonly="true" />
-					<s:textfield name="password" type="password" label="%{getText('RegConfirmation.Password')}" readonly="true" />
+					<s:textfield name="password" label="%{getText('RegConfirmation.Password')}" readonly="true" />
 					<s:textfield name="name" label="%{getText('RegConfirmation.Name')}" readonly="true" />
 					<s:textfield name="kana" label="%{getText('RegConfirmation.Kana')}" readonly="true" />
 					<s:textfield name="dateOfBirth" label="%{getText('RegConfirmation.DateOfBirth')}" readonly="true" />

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import com.mystruts.connections.OracleCon;
 import com.mystruts.models.User;
 
+
 public class UserDao {
 	public static ArrayList<User> search(String id, String name, String kana) {
 		Connection con = new OracleCon().getCon();
@@ -44,7 +45,7 @@ public class UserDao {
 		try {
 			con.setAutoCommit(false);
 			String sql1 = "INSERT INTO USERS (ID, PASS, NAME, KANA) values(?,?,?,?)";
-			String sql2 = "INSERT INTO USERDETAILS (ID, BIRTH, CLUB) values(?,?,?)";
+			String sql2 = "INSERT INTO USERDETAILS (NO, ID, BIRTH, CLUB) values(?,?,?,?)";
 			try(PreparedStatement ps1 = con.prepareStatement(sql1);
 					PreparedStatement ps2 = con.prepareStatement(sql2)) {
 				ps1.setString(1, user.getId());
@@ -53,9 +54,10 @@ public class UserDao {
 				ps1.setString(4, user.getKana());
 				ps1.execute();
 
-				ps2.setString(1, user.getId());
-				ps2.setDate(2, new java.sql.Date(user.getDateOfBirth().getTime()));
-				ps2.setString(3, user.getClub());
+				ps2.setInt(1, getMaxNo()+1);
+				ps2.setString(2, user.getId());
+				ps2.setDate(3, new java.sql.Date(user.getDateOfBirth().getTime()));
+				ps2.setString(4, user.getClub());
 				ps2.execute();
 				
 				con.commit();
@@ -71,6 +73,26 @@ public class UserDao {
 			e.printStackTrace();
 			throw e;
 		}
+	}
+	
+	public static int getMaxNo() {
+		Connection con = new OracleCon().getCon();
+		int NO = 0;
+		try {
+			String sql = "SELECT max(NO) as NO FROM USERDETAILS";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			System.out.println("NO : ");
+			NO = rs.getInt("NO");
+			System.out.println(NO);
+			rs.close();
+			ps.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return NO;
 	}
 
 	public static void updateUser(User user) throws Exception {

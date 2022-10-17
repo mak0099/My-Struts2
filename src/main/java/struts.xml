@@ -30,6 +30,19 @@
         	<result name="success">/search.jsp</result>
         	<result name="input">/search.jsp</result>
         </action>
+        <action name="back-to-search">
+        	<interceptor-ref name="store">
+			  <param name="operationMode">STORE</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+        	<result name="success" type="redirectAction">
+        		<param name="actionName">search-user</param>
+        		<param name="id">${#session.id}</param>
+        		<param name="name">${#session.name}</param>
+        		<param name="kana">${#session.kana}</param>
+        		<param name="redirect">true</param>
+        	</result>
+        </action>
         <action name="new-registration">
         	<result>/registration.jsp</result>
         </action>
@@ -51,6 +64,7 @@
         		<param name="id">${#session.id}</param>
         		<param name="name">${#session.name}</param>
         		<param name="kana">${#session.kana}</param>
+        		<param name="redirect">true</param>
         	</result>
         	<result name="input">/registration.jsp</result>
         </action>
@@ -72,6 +86,7 @@
         		<param name="id">${#session.id}</param>
         		<param name="name">${#session.name}</param>
         		<param name="kana">${#session.kana}</param>
+        		<param name="redirect">true</param>
         	</result>
         	<result name="input">/edit.jsp</result>
         </action>
@@ -89,6 +104,7 @@
         		<param name="id">${#session.id}</param>
         		<param name="name">${#session.name}</param>
         		<param name="kana">${#session.kana}</param>
+        		<param name="redirect">true</param>
         	</result>
         	<result name="input">/404.jsp</result>
         </action>

@@ -13,7 +13,7 @@ public class RegistrationAction extends ActionSupport implements ModelDriven<Use
 			addFieldError("id", getText("MSE001"));
 		}
 //		If the user ID is not half-width alphanumeric characters
-		if (user.getId() != null && (!AppService.checkHalfWidthCaracter(user.getId()) || AppService.checkContainSymbol(user.getId()))) {
+		else if (!AppService.checkHalfWidthCaracter(user.getId()) || AppService.checkContainSymbol(user.getId())) {
 			addFieldError("id", getText("MSE002"));
 		}
 //		Duplicate user ID
@@ -30,7 +30,7 @@ public class RegistrationAction extends ActionSupport implements ModelDriven<Use
 			addFieldError("id", getText("MSE001"));
 		}
 //		If the user ID is not half-width alphanumeric characters
-		else if (!AppService.checkHalfWidthCaracter(user.getId())) {
+		else if (!AppService.checkHalfWidthCaracter(user.getId()) || AppService.checkContainSymbol(user.getId())) {
 			addFieldError("id", getText("MSE002"));
 		}
 //		Duplicate user ID
@@ -45,7 +45,7 @@ public class RegistrationAction extends ActionSupport implements ModelDriven<Use
 			addFieldError("password", getText("MSE005"));
 		}
 //		If the password is not half-width alphanumeric characters
-		else if (!AppService.checkHalfWidthCaracter(user.getPassword())) {
+		else if (!AppService.checkHalfWidthCaracter(user.getPassword()) || AppService.checkContainSymbol(user.getPassword())) {
 			addFieldError("password", getText("MSE006"));
 		}
 //		If password re-entry is not entered
@@ -53,7 +53,7 @@ public class RegistrationAction extends ActionSupport implements ModelDriven<Use
 			addFieldError("passwordConfirmation", getText("MSE005"));
 		}
 //		If password re-entry is other than half-width alphanumeric characters
-		else if (!AppService.checkHalfWidthCaracter(user.getPasswordConfirmation())) {
+		else if (!AppService.checkHalfWidthCaracter(user.getPasswordConfirmation()) || AppService.checkContainSymbol(user.getPasswordConfirmation())) {
 			addFieldError("passwordConfirmation", getText("MSE008"));
 		}
 //		If the re-entered password does not match the entered password

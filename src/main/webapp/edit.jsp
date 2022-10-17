@@ -30,7 +30,7 @@
 			<tr>
 			    <td colspan="2" style="text-align:right; padding-top:5px">
 					<s:submit property="submit" value="%{getText('Edit.ButtonSubmit')}" theme="simple" />
-					<s:textfield type="button" value="%{getText('Edit.ButtonBack')}" theme="simple"  onclick="history.back()" />
+					<s:textfield type="button" value="%{getText('Edit.ButtonBack')}" theme="simple"  onclick="window.location='back-to-search.action'" />
 			    </td>
 			</tr> 
 		</s:form>
