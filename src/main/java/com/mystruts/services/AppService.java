@@ -17,6 +17,16 @@ public class AppService {
 		}
 		return true;
 	}
+	public static boolean checkFullWidthCaracter(String str) {
+		try {
+			if (str.getBytes("MS932").length != 2 * str.length()) {
+				return false;
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
 	public static boolean checkContainSymbol(String str) {
 		Pattern p = Pattern.compile("[^a-z0-9]", Pattern.CASE_INSENSITIVE);
 		Matcher m = p.matcher(str);

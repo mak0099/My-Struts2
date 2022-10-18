@@ -65,7 +65,7 @@ public class RegistrationAction extends ActionSupport implements ModelDriven<Use
 			addFieldError("name", getText("MSE009"));
 		}
 //		If the name is not full-width
-		else if (AppService.checkHalfWidthCaracter(user.getName())) {
+		else if (!AppService.checkFullWidthCaracter(user.getName())) {
 			addFieldError("name", getText("MSE010"));
 		}
 //		If Kana is not entered
@@ -89,7 +89,7 @@ public class RegistrationAction extends ActionSupport implements ModelDriven<Use
 			addFieldError("dateOfBirth", getText("MSE018"));
 		}
 //		If the committee is not full-width
-		if (user.getClub().length() > 0 && AppService.checkHalfWidthCaracter(user.getClub())) {
+		if (user.getClub().length() > 0 && !AppService.checkFullWidthCaracter(user.getClub())) {
 			addFieldError("club", getText("MSE019"));
 		}
 	}
